@@ -11,6 +11,9 @@ let ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    link: {
+        type: String
+    },
     saved: {
         type: Boolean,
         required: true,
