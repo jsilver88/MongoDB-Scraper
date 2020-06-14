@@ -1,0 +1,63 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-head">
+            <a class="navbar-brand " href="/">MongoDB Scraper</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/saved">Saved Articles</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <div class="caption">
+        <h1>Saved Articles</h1>
+    </div>
+</div>
+
+<div class="container-fluid articles">
+    <h3>Saved articles</h3>
+    {{#each articles}}
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <a href="{{link}}" class="card-link" target="_blank">Click for full article</a>
+            <p class="card-text">{{intro}}...</p>
+            <a data-articleId={{_id}} class="btn btn-primary remove-button">Remove from saved</a>
+            <a data-articleId={{_id}} class="btn btn-primary comment-modal-btn" data-toggle="modal">Add a comment</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div id="noteModal" class="modal" tabindex="-1" role="dialog" data-articleId="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="note-modal-title" class="modal-title"></h5>
+            </div>
+            <div class="modal-body container">
+                <ul class="comments-list">
+                </ul>
+                <div class="form-group">
+                    <label for="comments">Add Comment</label>
+                    <textarea name="comments" class="form-control" id="commentsBox" rows="2" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary save-button" data-dismiss="modal">Save</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>TechCrunch Scraper</p>
+    </div>
+</footer>
+
+<script src="../js/saved.js"></script>

@@ -7,12 +7,13 @@ let ArticleSchema = new Schema({
         type: String,
         required: true
     },
+    url: {
+        type: String,
+        required: false
+    },
     description: {
         type: String,
-        required: true
-    },
-    link: {
-        type: String
+        required: false
     },
     saved: {
         type: Boolean,

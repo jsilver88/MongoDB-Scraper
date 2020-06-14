@@ -1,0 +1,30 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 80px;
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+.navbar {
+    background: linear-gradient(#ffffff, #abccfb);
+}
+
+.jumbotron {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    height: 500px;
+    background: linear-gradient(#abccfb,#ffffff);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #abccfb;
+    height: 80px;
+    background: linear-gradient(#ffffff, #abccfb);
+}
