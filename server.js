@@ -61,9 +61,9 @@ app.get("/scrape", function (req, res) {
                     url: url,
                     description: description
                 }).then(function (dbArticle) {
-                    console.log(dbArticle);
+                    res.send(dbArticle);
                 }).catch(function (err) {
-                    console.log(err);
+                    res.json(err);
                 })
             }
         })
