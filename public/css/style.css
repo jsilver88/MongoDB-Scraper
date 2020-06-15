@@ -8,16 +8,75 @@ body {
     font-family: 'Balsamiq Sans', cursive;
 }
 
-.navbar {
-    background: linear-gradient(#ffffff, #abccfb);
-}
-
 .jumbotron {
     position: relative;
     width: 100%;
     padding: 0;
     height: 500px;
     background: linear-gradient(#abccfb,#ffffff);
+}
+
+.jumbotron .caption {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+}
+
+  .jumbotron h1 {
+    font-size: 80px;
+    font-weight: 800;
+}
+
+.jumbotron h4 {
+    font-size: 30px;
+}
+
+.articles {
+    padding-bottom: 30px;
+}
+
+.card {
+    box-shadow: 2px 2px 10px gray;
+    margin: 20px 0;
+}
+
+nav {
+    background: #085ca1;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: #040505;
+}
+
+li a {
+    color: white;
+    padding: 10px;
+}
+
+li a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-nav > li > a.scrape-button {
+  padding: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-weight: 800;
+  color: white;
+}
+
+.navbar-nav > li > a.scrape-button:hover {
+  background: #040505;
+}
+
+.scrape-button {
+    cursor: pointer;
 }
 
 .footer {
@@ -28,3 +87,16 @@ body {
     height: 80px;
     background: linear-gradient(#ffffff, #abccfb);
 }
+
+.footer > .container > p {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    margin: 0;
+    font-weight: 800;
+    background: #085ca1;
+  }

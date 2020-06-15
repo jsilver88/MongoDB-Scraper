@@ -3,7 +3,7 @@ $(document).ready(function () {
         let savedNews = $(this).data();
         savedNews.saved = true;
 
-        let id = $(this).attr("data-articleId");
+        let id = $(this).attr("data-articleid");
         $.ajax("/saved/" + id, {
             method: "PUT",
             data: savedNews

@@ -17,6 +17,9 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlin
 let app = express();
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({
+    type: "application/json"
+}));
 // Make public a static folder
 app.use(express.static(__dirname + "/public"));
 
@@ -29,6 +32,10 @@ mongoose.connect(MONGODB_URI, function (err) {
         console.log("mongoose connection is successful.");
     }
 });
+
+// Connect Handlebars to express
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // Get articles from the db
 app.get("/", function (req, res) {
@@ -48,7 +55,7 @@ app.get("/", function (req, res) {
 
 // Get route for scraping the website
 app.get("/scrape", function (req, res) {
-    axios.get("https://techcrunch.com/", function (response) {
+    axios.get("https://techcrunch.com/").then(function (response) {
         let $ = cheerio.load(response.data);
         $("div.post-block").each(function (i, element) {
             let title = $(element).find("a.post-block__title__link").text().trim();
@@ -61,12 +68,13 @@ app.get("/scrape", function (req, res) {
                     url: url,
                     description: description
                 }).then(function (dbArticle) {
-                    res.send(dbArticle);
+                    console.log(dbArticle);
                 }).catch(function (err) {
-                    res.json(err);
+                    console.log(err);
                 })
             }
         })
+        res.send("Scrape Complete");
     })
 });
 
@@ -83,10 +91,22 @@ app.get("/saved", function (req, res) {
     })
 });
 
+app.put("/saved/:id", function (req, res) {
+    db.Article.findByIdAndUpdate(
+        req.params.id, {
+        $set: req.body
+    }, {
+        new: true
+    }).then(function (dbArticle) {
+        res.render("saved", {
+            articles: dbArticle
+        })
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
 
-// Connect Handlebars to express
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+
 
 app.listen(PORT, function () {
     console.log("App running on port " + PORT + "!");

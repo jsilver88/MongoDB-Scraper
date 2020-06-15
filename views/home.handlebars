@@ -1,13 +1,13 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="collapse navbar-collapse">
             <a class="navbar-brand" href="/">MongoDB Scraper</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a href="/">Home</a></li>
+                <li><a href="/saved">Saved Articles</a></li>
+                <li><a class="btn btn-danger scrape-button">Scrape New Articles</a></li>
+            </ul>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/saved">Saved Articles</a></li>
-            <li><a class="btn btn-danger scrape-button">Scrape New Articles</a></li>
-        </ul>
     </div>
 </nav>
 
@@ -24,9 +24,9 @@
     <div class="card bg-light">
         <div class="card-body">
             <h4 class="card-title">{{title}}</h4>
-            <a href="{{url}}" class="card-link" target="_blank">Click for full article</a>
+            <a href={{url}} class="card-link" target="_blank">Click for full article</a>
             <p class="card-text">{{description}}</p>
-            <a data-articleId="{{_id}}" class="btn btn-outline save-button">Save article</a>
+            <a data-articleid={{_id}} class="btn btn-outline save-button">Save article</a>
         </div>
     </div>
     {{/each}}
