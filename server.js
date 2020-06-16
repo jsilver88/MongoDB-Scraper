@@ -16,7 +16,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlin
 // Initialize Express
 let app = express();
 app.use(logger("dev"));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({
     type: "application/json"
 }));
@@ -74,7 +74,7 @@ app.get("/scrape", function (req, res) {
                 })
             }
         })
-        res.send("Scrape Complete");
+        res.send("Scrape Complete")
     })
 });
 
@@ -104,6 +104,27 @@ app.put("/saved/:id", function (req, res) {
     }).catch(function (err) {
         res.json(err);
     });
+});
+
+app.post("/submit/:id", function (req, res) {
+    db.Comment.create(req.body).then(function (dbComment) {
+        let articleId = mongoose.Types.ObjectId(req.params.id);
+        return db.Article.findByIdAndUpdate(articleId, {
+            $push: {
+                comments: dbComment._id
+            }
+        })
+    }).then(function (dbArticle) {
+        res.json(dbComment);
+    }).catch(function (err) {
+        res.json(err);
+    })
+});
+
+app.get("/comments/article/:id", function (req, res) {
+    db.Article.findOne({ "_id": req.params.id }).populate("comments").then(function (dbArticle) {
+        res.json(dbArticle);
+    })
 });
 
 

@@ -17,11 +17,10 @@ let ArticleSchema = new Schema({
     },
     saved: {
         type: Boolean,
-        required: true,
         default: false
     },
     comments: [{
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Comment"
     }]
 });

@@ -13,7 +13,7 @@ body {
     width: 100%;
     padding: 0;
     height: 500px;
-    background: linear-gradient(#abccfb,#ffffff);
+    background: url("../images/techcrunhlogo.png");
 }
 
 .jumbotron .caption {
@@ -43,6 +43,10 @@ body {
 
 nav {
     background: #085ca1;
+}
+
+.navbar-nav .nav-link {
+    padding-top: 1rem;
 }
 
 .navbar-brand {
