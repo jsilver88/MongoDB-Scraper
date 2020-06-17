@@ -25,7 +25,7 @@ app.use(express.static(__dirname + "/public"));
 
 // Connect to Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, function (err) {
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function (err) {
     if (err) {
         console.log(err);
     } else {

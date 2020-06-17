@@ -7,7 +7,7 @@ $(document).ready(function () {
 
         let id = $(this).attr("data-articleId");
         $.ajax("/saved/" + id, {
-            method: "PUT",
+            Method: "PUT",
             data: savedNews
         }).then(function (data) {
             location.reload();
@@ -46,7 +46,7 @@ $(document).ready(function () {
         $("#commentsBox").val("");
 
         $.ajax("/comments/article/" + articleId, {
-            method: "GET"
+            Method: "GET"
         }).then(function (data) {
             commentModal(data);
         })
@@ -62,7 +62,7 @@ $(document).ready(function () {
         }
 
         $.ajax("/submit/" + thisId, {
-            method: "POST",
+            Method: "POST",
             data: newComment
         }).then(function (data) {
             console.log(data);
