@@ -4,8 +4,9 @@ $(document).ready(function () {
     $(".save-button").on("click", function (e) {
         let savedNews = $(this).data();
         savedNews.saved = true;
+        console.log('saved!');
 
-        let id = $(this).attr("data-articleId");
+        let id = $(this).attr("data-articleid");
         $.ajax("/saved/" + id, {
             Method: "PUT",
             data: savedNews
@@ -42,7 +43,7 @@ $(document).ready(function () {
         let articleId = $(this).attr("data-articleId");
         $("#commentModal").attr("data-articleId", articleId);
         $("#comment-title").empty();
-        $("comments-list").empty();
+        $(".comments-list").empty();
         $("#commentsBox").val("");
 
         $.ajax("/comments/article/" + articleId, {

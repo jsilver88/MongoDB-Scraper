@@ -2,10 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
+const Handlebars = require("handlebars");
 const logger = require("morgan");
 // Scraping tools
 const axios = require("axios");
 const cheerio = require("cheerio");
+
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 
 // Require all models
 let db = require("./models");
@@ -25,16 +28,17 @@ app.use(express.static(__dirname + "/public"));
 
 // Connect to Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true }, function (err) {
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {
     if (err) {
         console.log(err);
     } else {
-        console.log("mongoose connection is successful.");
+        console.log("Mongoose connection is successful.");
     }
 });
 
+
 // Connect Handlebars to express
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({ defaultLayout: "main", handlebars: allowInsecurePrototypeAccess(Handlebars) }));
 app.set("view engine", "handlebars");
 
 // Get articles from the db
@@ -57,7 +61,7 @@ app.get("/", function (req, res) {
 app.get("/scrape", function (req, res) {
     axios.get("https://techcrunch.com/").then(function (response) {
         let $ = cheerio.load(response.data);
-        $("div.post-block").each(function (i, element) {
+        $("article.post-block").each(function (i, element) {
             let title = $(element).find("a.post-block__title__link").text().trim();
             let url = $(element).find("a.post-block__title__link").attr("href");
             let description = $(element).children(".post-block__content").text().trim();
